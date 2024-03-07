@@ -4,7 +4,7 @@ func main() {
 	println("git test")
 }
 
-type Notifier interface {
+type MessageSender interface {
 	Send(message, lang Language) Event
 }
 
@@ -20,6 +20,21 @@ func (e *SMSNotifier) Send(message, lang Language) Event {
 }
 func (e *TelegramNotifier) Send(message, lang Language) Event {
 	return Event{}
+}
+
+// 依賴注入
+type NotificationService struct {
+	Sender MessageSender
+}
+
+func NewNotificationService(message MessageSender) *NotificationService {
+	return &NotificationService{
+		Sender: message,
+	}
+}
+
+func (n *NotificationService) Notify(message, lang Language) Event {
+	return n.Sender.Send(message, lang)
 }
 
 type User struct {
