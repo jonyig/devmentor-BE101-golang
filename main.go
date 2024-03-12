@@ -1,51 +1,45 @@
 package main
 
+import "fmt"
+
 func main() {
 	println("git test")
 }
 
-type MessageSender interface {
-	Send(message, lang Language) Event
-}
-
-type EmailNotifier struct{}
-type SMSNotifier struct{}
-type TelegramNotifier struct{}
-
-func (e *EmailNotifier) Send(message, lang Language) Event {
-	return Event{}
-}
-func (e *SMSNotifier) Send(message, lang Language) Event {
-	return Event{}
-}
-func (e *TelegramNotifier) Send(message, lang Language) Event {
-	return Event{}
-}
-
-// 依賴注入
-type NotificationService struct {
-	Sender MessageSender
-}
-
-func NewNotificationService(message MessageSender) *NotificationService {
-	return &NotificationService{
-		Sender: message,
-	}
-}
-
-func (n *NotificationService) Notify(message, lang Language) Event {
-	return n.Sender.Send(message, lang)
-}
-
-type User struct {
-	Lang Language
-}
-
-type Event struct {
-	massage string
+type Notifier interface {
+	Notify(name string, lang Language)
 }
 
 type Language struct {
-	zh_TW string
-	en_US string
+	En_Us string
+	Zh_Tw string
+}
+
+type SignUp struct{}
+type BookClass struct{}
+type CancelClass struct{}
+
+func (n *SignUp) Notify(name string, lang Language) {
+	switch lang {
+	case Language{En_Us: lang.En_Us}:
+		fmt.Println("SignUp")
+	case Language{Zh_Tw: lang.Zh_Tw}:
+		fmt.Println("註冊")
+	}
+}
+func (n *BookClass) Notify(name string, lang Language) {
+	switch lang {
+	case Language{En_Us: lang.En_Us}:
+		fmt.Println("BookClass")
+	case Language{Zh_Tw: lang.Zh_Tw}:
+		fmt.Println("預定課程")
+	}
+}
+func (n *CancelClass) Notify(name string, lang Language) {
+	switch lang {
+	case Language{En_Us: lang.En_Us}:
+		fmt.Println("CancelClass")
+	case Language{Zh_Tw: lang.Zh_Tw}:
+		fmt.Println("取消課程")
+	}
 }
