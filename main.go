@@ -7,39 +7,37 @@ func main() {
 }
 
 type Notifier interface {
-	Notify(name string, lang Language)
-}
-
-type Language struct {
-	En_Us string
-	Zh_Tw string
+	Notify(name string, lang string)
 }
 
 type SignUp struct{}
 type BookClass struct{}
 type CancelClass struct{}
 
-func (n *SignUp) Notify(name string, lang Language) {
+// 沒有要修改就傳實體就好，指針是拿來修改的
+func (SignUp) Notify(name string, lang string) {
 	switch lang {
-	case Language{En_Us: lang.En_Us}:
-		fmt.Println("SignUp")
-	case Language{Zh_Tw: lang.Zh_Tw}:
-		fmt.Println("註冊")
+	case "en_US":
+		fmt.Println(name + " Signed Up")
+	case "zh_TW":
+		fmt.Println(name + " 已註冊")
 	}
 }
-func (n *BookClass) Notify(name string, lang Language) {
+
+func (BookClass) Notify(name string, lang string) {
 	switch lang {
-	case Language{En_Us: lang.En_Us}:
-		fmt.Println("BookClass")
-	case Language{Zh_Tw: lang.Zh_Tw}:
-		fmt.Println("預定課程")
+	case "en_US":
+		fmt.Println(name + " Booked a Class")
+	case "zh_TW":
+		fmt.Println(name + " 已預定課程")
 	}
 }
-func (n *CancelClass) Notify(name string, lang Language) {
+
+func (CancelClass) Notify(name string, lang string) {
 	switch lang {
-	case Language{En_Us: lang.En_Us}:
-		fmt.Println("CancelClass")
-	case Language{Zh_Tw: lang.Zh_Tw}:
-		fmt.Println("取消課程")
+	case "en_US":
+		fmt.Println(name + " Canceled a Class")
+	case "zh_TW":
+		fmt.Println(name + " 已取消課程")
 	}
 }
