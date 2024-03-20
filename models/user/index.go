@@ -1,10 +1,9 @@
 package user
 
-import "be101_golang/models/language"
-
-type User struct {
-	lang language.Language
+type User interface {
+	Student
+	Guest
 }
 
-type Student struct{}
-type Guest struct{}
+type Student interface{}
+type Guest interface{}
