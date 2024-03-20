@@ -1,4 +1,4 @@
-package model
+package user
 
 import "be101_golang/models/language"
 
