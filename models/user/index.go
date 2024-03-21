@@ -13,11 +13,12 @@ type Student struct {
 	PreferredLanguage language.Language
 }
 type Guest struct {
-	Name string
+	Name              string
+	PreferredLanguage language.Language
 }
 
 func (s Student) GetName() string                         { return s.Name }
 func (s Student) GetPreferredLanguage() language.Language { return s.PreferredLanguage }
 
-func (g Guest) GetName() string                         { return g.Name }
-func (g Guest) GetPreferredLanguage() language.Language { return nil }
+func (g Guest) GetName() string                         { return "Guest" }
+func (g Guest) GetPreferredLanguage() language.Language { return g.PreferredLanguage }
