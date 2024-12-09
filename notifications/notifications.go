@@ -39,6 +39,6 @@ type LineNotificationChannel struct {
 	NotificationChannel
 }
 
-func (linenc *LineNotificationChannel) Send() {
-	fmt.Println("Sending Line notification")
+func (linenc *LineNotificationChannel) Send(language string) {
+	fmt.Println("Sending Line notification using " + language + " language")
 }

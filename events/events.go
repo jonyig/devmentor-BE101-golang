@@ -71,6 +71,8 @@ func (e EventNewyearCelebrate) GetEventID() string {
 }
 
 func NewEventNewyearCelebrate(person interface{}) EventNewyearCelebrate {
+	newNotificationByLine := notifications.LineNotificationChannel{}
+	newNotificationByLine.Send(person.language)
 	return EventNewyearCelebrate{
 		EventID: GenerateUniqueID(),
 		Person:  person,

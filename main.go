@@ -16,7 +16,8 @@ func main() {
 	}
 
 	newEventRegisterSuccess := events.NewEventRegisterSuccess(user1)
-	user1.Events = append(user1.Events, newEventRegisterSuccess)
+	newEventsNewyearCelebrate := events.NewEventNewyearCelebrate(user1)
+	user1.Events = append(user1.Events, newEventRegisterSuccess, newEventsNewyearCelebrate)
 	eventsList := user1.Events
 	for _, event := range eventsList {
 		switch e := event.(type) {
