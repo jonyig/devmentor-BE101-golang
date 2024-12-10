@@ -7,14 +7,17 @@ import (
 )
 
 func main() {
-	user1 := Person{
-		PersonName:   "Alex",
-		IdentityType: "User",
-		Language:     "en-US",
-		Events:       []Event{},
+	user1 := User{
+		Person: Person{
+			PersonName:   "Alex",
+			IdentityType: "User",
+			Language:     "en-US",
+			Events:       []Event{},
+		},
 	}
-
+	fmt.Println("My name is " + user1.PersonName + ", I am a " + user1.IdentityType)
 	user1.Events = append(user1.Events, NewEventRegisterSuccess(&user1)) // 註冊成功: email & sms
+	fmt.Println("My name is " + user1.PersonName + ", I am a " + user1.IdentityType)
 	user1.Events = append(user1.Events, NewEventScheduleSuccess(user1))  // 學生 預約課程: email & telegram
 	user1.Events = append(user1.Events, NewEventCancelClasses(user1))    // 學生 取消課程: email & telegram
 	user1.Events = append(user1.Events, NewEventNewYearCelebrate(user1)) // 新年通知
@@ -41,14 +44,20 @@ func (e EventRegisterSuccess) GetEventID() string {
 	return e.EventID
 }
 
-func NewEventRegisterSuccess(p *Person) EventRegisterSuccess {
-	p.IdentityType = "Student"
+func NewEventRegisterSuccess(u *User) EventRegisterSuccess {
+	u.IdentityType = "Student"
+	newStudent := Student{
+		Person:    u.Person,
+		StudentId: fmt.Sprintf("S%06d", rand.Intn(1000000)),
+	}
+	u.Person = newStudent.Person
 	newNotificationByMail := EmailNotificationChannel{}
 	newNotificationByMail.Send("Register Success")
 	newNotificationBySMS := SmsNotificationChannel{}
 	newNotificationBySMS.Send("Register Success")
 	return EventRegisterSuccess{
 		EventID: GenerateUniqueID(),
+		Person:  newStudent,
 	}
 }
 
@@ -81,9 +90,9 @@ func (e EventNewyearCelebrate) GetEventID() string {
 	return e.EventID
 }
 
-func NewEventNewYearCelebrate(p Person) EventNewyearCelebrate {
+func NewEventNewYearCelebrate(u User) EventNewyearCelebrate {
 	newNotificationByLine := LineNotificationChannel{}
-	newNotificationByLine.Send("New Year Celebrate", p)
+	newNotificationByLine.Send("New Year Celebrate", u)
 	return EventNewyearCelebrate{
 		EventID: GenerateUniqueID(),
 	}
@@ -122,8 +131,13 @@ type User struct {
 	Person
 }
 
+func (u User) Echo() {
+	fmt.Println(u.PersonName + " now is a User")
+}
+
 type Student struct {
 	Person
+	StudentId string
 }
 
 func (s Student) Echo() {
@@ -169,6 +183,6 @@ type LineNotificationChannel struct {
 	NotificationChannel
 }
 
-func (linenc *LineNotificationChannel) Send(eventTitle string, p Person) {
-	fmt.Println(eventTitle + " - Sending Line notification using " + p.Language + " language")
+func (linenc *LineNotificationChannel) Send(eventTitle string, u User) {
+	fmt.Println(eventTitle + " - Sending Line notification using " + u.Language + " language")
 }
