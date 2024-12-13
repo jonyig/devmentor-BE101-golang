@@ -1,10 +1,33 @@
 package event
 
+import (
+	"be101/notification"
+	"be101/person"
+)
+
 type RegisterSuccess struct {
+	notifies []notification.NotificationInterface
 }
 
-func (e *RegisterSuccess) Trigger() string {
-	return ""
+func (e *RegisterSuccess) SetNotify(n notification.NotificationInterface) {
+	e.notifies = append(e.notifies, n)
+}
+func (e *RegisterSuccess) RoleTransition(p *person.User) person.PersonInterface {
+	newStudent := person.Student{
+		StudentId: "1000",
+	}
+	return newStudent
+}
+
+func (e *RegisterSuccess) Trigger(p person.User) {
+	e.SetNotify(notification.Email{})
+	e.SetNotify(notification.Telegram{})
+	e.SetNotify(notification.Sms{})
+	e.RoleTransition(&p)
+	for _, notify := range e.notifies {
+		notify.Send("Register Success")
+	}
+	//fmt.Println(p.Student.StudentId)
 }
 
 // feat: event module initial
@@ -12,3 +35,15 @@ func (e *RegisterSuccess) Trigger() string {
 // refactor:
 // test:
 // fix:
+// remote: github, gitlab
+// parent: parent project
+
+// fork kubernetes
+
+// remote: alexdev/kubernetes
+// parent: google/kubernetes
+
+// gitlab -> remote
+// git push --set-upstream origin feature-01
+// azure -> empty
+// git push --set-upstream azure feature-01
