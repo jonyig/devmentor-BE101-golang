@@ -12,9 +12,9 @@ func main() {
 		Language:     "zh-TW",
 	}
 	eventrs := event.RegisterSuccess{}
-	eventrs.Trigger(p)
+	eventrs.Trigger(&p)
 	eventhny := event.HappyNewYear{}
-	eventhny.Trigger(p)
+	eventhny.Trigger(&p)
 }
 
 // func NewEventRegisterSuccess(u *User) EventRegisterSuccess {

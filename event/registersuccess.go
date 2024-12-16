@@ -3,6 +3,7 @@ package event
 import (
 	"be101/notification"
 	"be101/person"
+	"fmt"
 )
 
 type RegisterSuccess struct {
@@ -12,22 +13,22 @@ type RegisterSuccess struct {
 func (e *RegisterSuccess) SetNotify(n notification.NotificationInterface) {
 	e.notifies = append(e.notifies, n)
 }
-func (e *RegisterSuccess) RoleTransition(p *person.User) person.PersonInterface {
-	newStudent := person.Student{
+func (e *RegisterSuccess) RoleTransition(p *person.User) *person.Student {
+	newStudent := &person.Student{
 		StudentId: "1000",
 	}
 	return newStudent
 }
 
-func (e *RegisterSuccess) Trigger(p person.User) {
+func (e *RegisterSuccess) Trigger(p *person.User) {
 	e.SetNotify(notification.Email{})
 	e.SetNotify(notification.Telegram{})
 	e.SetNotify(notification.Sms{})
-	e.RoleTransition(&p)
+	newStudent := e.RoleTransition(p)
 	for _, notify := range e.notifies {
 		notify.Send("Register Success")
 	}
-	//fmt.Println(p.Student.StudentId)
+	fmt.Println("Student ID is " + newStudent.StudentId)
 }
 
 // feat: event module initial
