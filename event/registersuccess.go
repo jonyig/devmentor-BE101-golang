@@ -20,7 +20,11 @@ func (e *RegisterSuccess) Trigger(p person.User) {
 	e.SetNotify(notification.Sms{})
 	for _, notify := range e.notifies {
 		notify.Send()
-		fmt.Printf("Register Success! ")
+		if p.Language == "en-US" {
+			fmt.Printf("Register Success! ")
+		} else if p.Language == "zh-TW" {
+			fmt.Printf("註冊成功！")
+		}
 	}
 }
 

@@ -1,5 +1,7 @@
 package event
 
+import "be101/person"
+
 type EventInterface interface {
-	Trigger() string
+	Trigger(p person.User) string
 }

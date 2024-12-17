@@ -18,6 +18,10 @@ func (e *CancelClasses) Trigger(p person.User) {
 	e.SetNotify(notification.Telegram{})
 	for _, notify := range e.notifies {
 		notify.Send()
-		fmt.Printf("Cancel Classes! ")
+		if p.Language == "en-US" {
+			fmt.Printf("Cancel Classes! ")
+		} else if p.Language == "zh-TW" {
+			fmt.Printf("課程取消！")
+		}
 	}
 }
