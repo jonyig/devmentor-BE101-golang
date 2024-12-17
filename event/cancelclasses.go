@@ -13,7 +13,7 @@ type CancelClasses struct {
 func (e *CancelClasses) SetNotify(n notification.NotificationInterface) {
 	e.notifies = append(e.notifies, n)
 }
-func (e *CancelClasses) Trigger(p *person.User) {
+func (e *CancelClasses) Trigger(p person.User) {
 	e.SetNotify(notification.Email{})
 	e.SetNotify(notification.Telegram{})
 	for _, notify := range e.notifies {

@@ -14,7 +14,7 @@ func (e *ScheduleSuccess) SetNotify(n notification.NotificationInterface) {
 	e.notifies = append(e.notifies, n)
 }
 
-func (e *ScheduleSuccess) Trigger(p *person.User) {
+func (e *ScheduleSuccess) Trigger(p person.User) {
 	fmt.Printf("Schedule Success! ")
 	e.SetNotify(notification.Email{})
 	e.SetNotify(notification.Telegram{})

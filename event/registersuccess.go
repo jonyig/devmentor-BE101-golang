@@ -13,23 +13,15 @@ type RegisterSuccess struct {
 func (e *RegisterSuccess) SetNotify(n notification.NotificationInterface) {
 	e.notifies = append(e.notifies, n)
 }
-func (e *RegisterSuccess) RoleTransition(p *person.User) *person.Student {
-	newStudent := &person.Student{
-		StudentId: "1000",
-	}
-	return newStudent
-}
 
-func (e *RegisterSuccess) Trigger(p *person.User) {
+func (e *RegisterSuccess) Trigger(p person.User) {
 	e.SetNotify(notification.Email{})
 	e.SetNotify(notification.Telegram{})
 	e.SetNotify(notification.Sms{})
-	newStudent := e.RoleTransition(p)
 	for _, notify := range e.notifies {
 		notify.Send()
 		fmt.Printf("Register Success! ")
 	}
-	fmt.Println("Student ID is " + newStudent.StudentId)
 }
 
 // feat: event module initial
