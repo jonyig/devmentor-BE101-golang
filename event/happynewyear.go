@@ -3,6 +3,7 @@ package event
 import (
 	"be101/notification"
 	"be101/person"
+	"fmt"
 )
 
 type HappyNewYear struct {
@@ -16,10 +17,11 @@ func (e *HappyNewYear) SetNotify(n notification.NotificationInterface) {
 func (e *HappyNewYear) Trigger(p *person.User) {
 	e.SetNotify(notification.Line{})
 	for _, notify := range e.notifies {
+		notify.Send()
 		if p.Language == "en-US" {
-			notify.Send("HappyNewYear")
+			fmt.Println("Happy New Year! ")
 		} else if p.Language == "zh-TW" {
-			notify.Send("新年快樂")
+			fmt.Println("新年快樂！")
 		}
 	}
 }

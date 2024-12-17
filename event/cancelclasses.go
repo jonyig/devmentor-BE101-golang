@@ -3,6 +3,7 @@ package event
 import (
 	"be101/notification"
 	"be101/person"
+	"fmt"
 )
 
 type CancelClasses struct {
@@ -16,6 +17,7 @@ func (e *CancelClasses) Trigger(p *person.User) {
 	e.SetNotify(notification.Email{})
 	e.SetNotify(notification.Telegram{})
 	for _, notify := range e.notifies {
-		notify.Send("CancelClasses")
+		notify.Send()
+		fmt.Printf("Cancel Classes! ")
 	}
 }

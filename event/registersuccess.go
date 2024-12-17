@@ -26,7 +26,8 @@ func (e *RegisterSuccess) Trigger(p *person.User) {
 	e.SetNotify(notification.Sms{})
 	newStudent := e.RoleTransition(p)
 	for _, notify := range e.notifies {
-		notify.Send("Register Success")
+		notify.Send()
+		fmt.Printf("Register Success! ")
 	}
 	fmt.Println("Student ID is " + newStudent.StudentId)
 }

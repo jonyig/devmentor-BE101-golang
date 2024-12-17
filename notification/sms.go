@@ -5,6 +5,6 @@ import "fmt"
 type Sms struct {
 }
 
-func (sms Sms) Send(eventTitle string) {
-	fmt.Println(eventTitle + " - Sending SMS notification")
+func (sms Sms) Send() {
+	fmt.Println("Sending SMS notificatio! ")
 }

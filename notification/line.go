@@ -5,6 +5,6 @@ import "fmt"
 type Line struct {
 }
 
-func (line Line) Send(eventTitle string) {
-	fmt.Println(eventTitle + " - Sending Line notification")
+func (line Line) Send() {
+	fmt.Println("Sending Line notification! ")
 }

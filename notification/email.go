@@ -5,6 +5,6 @@ import "fmt"
 type Email struct {
 }
 
-func (email Email) Send(eventTitle string) {
-	fmt.Println(eventTitle + " - Sending email notification")
+func (email Email) Send() {
+	fmt.Println("Sending email notification! ")
 }
