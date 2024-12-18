@@ -3,7 +3,6 @@ package event
 import (
 	"be101/notification"
 	"be101/person"
-	"fmt"
 )
 
 type RegisterSuccess struct {
@@ -18,14 +17,16 @@ func (e *RegisterSuccess) Trigger(p person.User) {
 	e.SetNotify(notification.Email{})
 	e.SetNotify(notification.Telegram{})
 	e.SetNotify(notification.Sms{})
-	for _, notify := range e.notifies {
-		notify.Send()
-		if p.Language == "en-US" {
-			fmt.Printf("Register Success! ")
-		} else if p.Language == "zh-TW" {
-			fmt.Printf("註冊成功！")
+	/*
+		for _, notify := range e.notifies {
+			notify.Send()
+			if p.Language == "en-US" {
+				fmt.Printf("Register Success! ")
+			} else if p.Language == "zh-TW" {
+				fmt.Printf("註冊成功！")
+			}
 		}
-	}
+	*/
 }
 
 // feat: event module initial

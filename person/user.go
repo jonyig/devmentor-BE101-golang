@@ -1,8 +1,9 @@
 package person
 
+import "be101/language"
+
 type User struct {
 	PersonName   string
 	IdentityType string
-	Language     string
-	PersonInterface
+	Language     language.LanguageInterface
 }

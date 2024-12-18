@@ -1,5 +1,5 @@
 package notification
 
 type NotificationInterface interface {
-	Send()
+	Send(string)
 }
