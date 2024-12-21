@@ -1,5 +1,8 @@
 package person
 
+import "be101/language"
+
 type PersonInterface interface {
-	Trigger() string
+	language.LanguageInterface
+	GetPersonName() string
 }

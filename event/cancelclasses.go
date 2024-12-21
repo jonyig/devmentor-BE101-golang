@@ -12,17 +12,16 @@ type CancelClasses struct {
 func (e *CancelClasses) SetNotify(n notification.NotificationInterface) {
 	e.notifies = append(e.notifies, n)
 }
-func (e *CancelClasses) Trigger(p person.User) {
+
+func (e *CancelClasses) Trigger(p person.PersonInterface) {
 	e.SetNotify(notification.Email{})
 	e.SetNotify(notification.Telegram{})
-	/*
-		for _, notify := range e.notifies {
-			notify.Send()
-			if p.Language == "en-US" {
-				fmt.Printf("Cancel Classes! ")
-			} else if p.Language == "zh-TW" {
-				fmt.Printf("課程取消！")
-			}
-		}
-	*/
+
+	for _, notify := range e.notifies {
+		notify.Send(p, p.Speak(e.GetName()))
+	}
+}
+
+func (e *CancelClasses) GetName() string {
+	return "CancelClasses"
 }

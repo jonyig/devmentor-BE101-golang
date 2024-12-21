@@ -1,10 +1,14 @@
 package notification
 
-import "fmt"
+import (
+	"be101/person"
+	"fmt"
+)
 
 type Telegram struct {
+	PhoneNumber string
 }
 
-func (telegram Telegram) Send(s string) {
-	fmt.Println("Sending Telegram notification! ")
+func (telegram Telegram) Send(p person.PersonInterface, s string) {
+	fmt.Println(s + " by Sending Telegram notification! ")
 }

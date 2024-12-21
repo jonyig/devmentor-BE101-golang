@@ -13,11 +13,11 @@ func (e *HappyNewYear) SetNotify(n notification.NotificationInterface) {
 	e.notifies = append(e.notifies, n)
 }
 
-func (e *HappyNewYear) Trigger(p person.User) {
+func (e *HappyNewYear) Trigger(p person.PersonInterface) {
 	e.SetNotify(notification.Line{})
 
 	for _, notify := range e.notifies {
-		notify.Send(p.Language.Speak(e.GetName()))
+		notify.Send(p, p.Speak(e.GetName()))
 	}
 
 }

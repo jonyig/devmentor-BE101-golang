@@ -1,10 +1,14 @@
 package notification
 
-import "fmt"
+import (
+	"be101/person"
+	"fmt"
+)
 
 type Sms struct {
+	PhoneNumber string
 }
 
-func (sms Sms) Send(s string) {
-	fmt.Println("Sending SMS notificatio! ")
+func (sms Sms) Send(p person.PersonInterface, s string) {
+	fmt.Println(s + " by Sending SMS notificatio! ")
 }

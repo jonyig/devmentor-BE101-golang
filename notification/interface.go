@@ -1,5 +1,7 @@
 package notification
 
+import "be101/person"
+
 type NotificationInterface interface {
-	Send(string)
+	Send(person.PersonInterface, string)
 }

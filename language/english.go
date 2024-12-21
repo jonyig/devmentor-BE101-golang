@@ -5,14 +5,14 @@ type English struct {
 
 func (e English) Speak(eventName string) string {
 	switch eventName {
-	// case event.RegisterSuccess:
-	// 	fmt.Printf("註冊成功！")
+	case "RegisterSuccess":
+		return "Register Success!"
 	case "HappyNewYear":
 		return "Happy New Year!"
-		// case CancelClasses:
-		// 	fmt.Printf("課程取消！")
-		// case ScheduleSuccess:
-		// 	fmt.Printf("預約課程成功！")
+	case "CancelClasses":
+		return "Cancel Classes!"
+	case "ScheduleSuccess":
+		return "Schedule Success!"
 	}
 
 	return ""

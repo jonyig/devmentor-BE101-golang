@@ -13,17 +13,15 @@ func (e *ScheduleSuccess) SetNotify(n notification.NotificationInterface) {
 	e.notifies = append(e.notifies, n)
 }
 
-func (e *ScheduleSuccess) Trigger(p person.User) {
+func (e *ScheduleSuccess) Trigger(p person.PersonInterface) {
 	e.SetNotify(notification.Email{})
 	e.SetNotify(notification.Telegram{})
-	/*
-		for _, notify := range e.notifies {
-			notify.Send()
-			if p.Language == "en-US" {
-				fmt.Printf("Schedule Success! ")
-			} else if p.Language == "zh-TW" {
-				fmt.Printf("預約課程成功！")
-			}
-		}
-	*/
+
+	for _, notify := range e.notifies {
+		notify.Send(p, p.Speak(e.GetName()))
+	}
+}
+
+func (e *ScheduleSuccess) GetName() string {
+	return "ScheduleSuccess"
 }
