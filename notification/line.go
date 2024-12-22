@@ -9,5 +9,5 @@ type Line struct {
 }
 
 func (line Line) Send(p person.PersonInterface, s string) {
-	fmt.Println(s + " by Sending Line notification! ")
+	fmt.Println(p.GetPersonName() + " " + s + " by Sending Line notification! ")
 }

@@ -1,6 +1,7 @@
 package event
 
 import (
+	"be101/constants"
 	"be101/notification"
 	"be101/person"
 )
@@ -23,5 +24,5 @@ func (e *ScheduleSuccess) Trigger(p person.PersonInterface) {
 }
 
 func (e *ScheduleSuccess) GetName() string {
-	return "ScheduleSuccess"
+	return constants.ScheduleSuccess
 }

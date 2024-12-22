@@ -10,5 +10,5 @@ type Sms struct {
 }
 
 func (sms Sms) Send(p person.PersonInterface, s string) {
-	fmt.Println(s + " by Sending SMS notificatio! ")
+	fmt.Println(p.GetPersonName() + " " + s + " by Sending SMS notificatio! ")
 }

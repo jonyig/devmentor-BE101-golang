@@ -10,5 +10,5 @@ type Telegram struct {
 }
 
 func (telegram Telegram) Send(p person.PersonInterface, s string) {
-	fmt.Println(s + " by Sending Telegram notification! ")
+	fmt.Println(p.GetPersonName() + " " + s + " by Sending Telegram notification! ")
 }
